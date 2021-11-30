@@ -384,15 +384,15 @@ class ManipulatorControl:
     def pour_callback(self,empty):
 
         self.open_gripper()
-        pose = self.get_pose('bottle')
+        bottle_pose = self.get_pose('bottle')
         logdebug(pose)
 
         # pose.position.z -= 0.178
         # pose.position.x += 0.0
         # pose.position.y -= 0.20
 
-        if pose.position.z <= .06:
-            pose.position.z = 0.065
+        if bottle_pose.position.z <= .06:
+            bottle_pose.position.z = 0.065
 
         self.arm_move_group.set_max_velocity_scaling_factor(0.5)
 
@@ -402,12 +402,11 @@ class ManipulatorControl:
 
         self.extend(.34,-1.9)
 
-        self.arm_move_group.go(pose, wait="true")
+        self.arm_move_group.go(bottle_pose, wait="true")
         self.arm_move_group.stop()
         
-
-        logdebug(pose)
-        self.arm_move_group.set_pose_target(pose)
+        logdebug(bottle_pose)
+        self.arm_move_group.set_pose_target(bottle_pose)
         success_flag, trajectory_message, planning_time, error_code = self.arm_move_group.plan()
         self.arm_move_group.execute(trajectory_message, wait=True)
         self.arm_move_group.stop()
@@ -419,11 +418,15 @@ class ManipulatorControl:
         print("Back to home")
         self.go_to_ready()
 
+        self.pivot(0.165)
+
         print("Tipping")
         joint5 = -pi/2
         joint7 = pi/2 + pi/4
         self.tip(joint5)
         self.spin(joint7)
+
+        self.pancake_pose = getCurrentPose()
 
         print("Squeezing")
         self.grasp(.04,.005,.005,.1,50)
@@ -431,7 +434,7 @@ class ManipulatorControl:
         print("Return bottle")
         self.spin(0)
 
-        self.arm_move_group.set_pose_target(pose)
+        self.arm_move_group.set_pose_target(bottle_pose)
         success_flag, trajectory_message, planning_time, error_code = self.arm_move_group.plan()
         self.arm_move_group.execute(trajectory_message, wait=True)
         self.arm_move_group.stop()
