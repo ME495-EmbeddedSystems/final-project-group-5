@@ -389,7 +389,8 @@ class ManipulatorControl:
             (trans, rot) = listen.lookupTransform('/panda_link0', '/spatula_tag', rospy.Time(0))
 
             logdebug(trans)
-            atag_offset = [0.05,-0.063,-0.102] #Offset between atag on the spatula rest and the spatula grip location
+            # atag_offset = [0.05,-0.063,-0.102] #Offset between atag on the spatula rest and the spatula grip location
+            atag_offset = [0.05, -0.095, -0.1]
 
 
             # obj_pos = [trans[0] + self.camera_offset[0] + atag_offset[0], trans[1] + self.camera_offset[1] + atag_offset[1] + 0.02, trans[2] + self.camera_offset[1] + atag_offset[2] + 0.025]
@@ -410,7 +411,8 @@ class ManipulatorControl:
             (trans, rot) = listen.lookupTransform('/panda_link0', '/bottle_tag', rospy.Time(0))
 
             logdebug(trans)
-            obj_pos = [trans[0] + self.camera_offset[0] + 0.02, trans[1] + self.camera_offset[1] + 0.0158 + 0.035, trans[2] + self.camera_offset[2] + .05] #0.02, 0.04
+            # obj_pos = [trans[0] + self.camera_offset[0] + 0.02, trans[1] + self.camera_offset[1] + 0.0158 + 0.035, trans[2] + self.camera_offset[2] + .05] #0.02, 0.04
+            obj_pos = [trans[0] + self.camera_offset[0] + 0.035, trans[1] + self.camera_offset[1], trans[2] + self.camera_offset[2] + 0.01] 
 
         else: 
             KeyError("Object does not exist")
