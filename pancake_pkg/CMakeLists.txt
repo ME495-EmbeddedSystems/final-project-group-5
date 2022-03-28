@@ -170,7 +170,7 @@ include_directories(
 # in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
   nodes/pancake_control
-  nodes/vision_test_node
+  nodes/pancake_vision
   nodes/cartesian_control
   test/pancake_test
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

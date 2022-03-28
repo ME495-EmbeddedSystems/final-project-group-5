@@ -1,0 +1,14 @@
+<launch>
+
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch" pass_all_args="true">
+            <arg name = "align_depth" value="true"/>
+    </include>
+
+    <include file="$(find pancake_pkg)/launch/apriltag_pancake.launch" pass_all_args="true">
+            <arg name = "publish_tfs" value="true"/>
+            <arg name = "camera_frame" value="camera_color_optical_frame"/>
+            <arg name = "camera_name" value="/camera/color"/>
+            <arg name = "image_topic" value="image_raw"/>
+    </include>
+
+</launch>

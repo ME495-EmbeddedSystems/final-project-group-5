@@ -10,9 +10,9 @@
     <node pkg="tf2_ros" type="static_transform_publisher" name="virtual_joint_broadcaster_0" args="0 0 0 0 0 0 world panda_link0" />
 
     <!-- the vision test launch file -->
-    <include file="$(find pancake_pkg)/launch/vision_test.launch"/>
+    <include file="$(find pancake_pkg)/launch/vision.launch"/>
 
-    <node name="vision_test_node" pkg="pancake_pkg" type="vision_test_node" output="screen"/>
+    <node name="pancake_vision" pkg="pancake_pkg" type="pancake_vision" output="screen"/>
 
     <group if="$(arg use_sim)">
         <!-- We do not have a real robot connected, so publish fake joint states via a joint_state_publisher
@@ -48,7 +48,7 @@
 
     <!-- Run Rviz and load the default config to see the state of the move_group node -->
     <include file="$(find panda_moveit_config)/launch/moveit_rviz.launch">
-        <arg name="rviz_config" value="$(find pancake_pkg)/config/model.rviz"/>
+        <!-- <arg name="rviz_config" value="$(find pancake_pkg)/config/model.rviz"/> -->
     </include>
 
     <!-- yaml files go here -->
