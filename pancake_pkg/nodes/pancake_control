@@ -412,7 +412,7 @@ class ManipulatorControl:
 
             logdebug(trans)
             # obj_pos = [trans[0] + self.camera_offset[0] + 0.02, trans[1] + self.camera_offset[1] + 0.0158 + 0.035, trans[2] + self.camera_offset[2] + .05] #0.02, 0.04
-            obj_pos = [trans[0] + self.camera_offset[0] + 0.035, trans[1] + self.camera_offset[1], trans[2] + self.camera_offset[2] + 0.01] 
+            obj_pos = [trans[0] + self.camera_offset[0] + 0.035, trans[1] + self.camera_offset[1] + 0.025, trans[2] + self.camera_offset[2] + 0.01] 
 
         else: 
             KeyError("Object does not exist")
@@ -788,7 +788,7 @@ class ManipulatorControl:
 
         # translating based on the end effector position
         self.ee_pose = self.arm_move_group.get_current_pose()
-        self.ee_pose.pose.position.x = self.pancake_pose.position.x + 0.03
+        self.ee_pose.pose.position.x = self.pancake_pose.position.x # formerly +0.03
         waypoints.append(deepcopy(self.ee_pose.pose))
 
         moveit_robot_state = self.robot.get_current_state()

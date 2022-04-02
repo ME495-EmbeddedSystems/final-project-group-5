@@ -17,6 +17,8 @@ BROADCASTERS:
     + flip_location ~ static coordinates in world frame for where the pancake is at the time of flipping
     + lift_location ~ static coordinates in world frame for where the pancake is at the time of flipping
 
+4-2-2022 Changed hulls_by_area_flip[1] " "[0]
+
 """
 
 from numpy.core.defchararray import lower
@@ -249,7 +251,7 @@ class ImageProcessing:
                 self.contours_by_area_flip = sorted(contours, key=cv2.contourArea, reverse=True)
                 self.hulls_by_area_flip = sorted(hull_list, key=cv2.contourArea, reverse=True)
 
-                M = cv2.moments(self.hulls_by_area_flip[1])
+                M = cv2.moments(self.hulls_by_area_flip[0])
                 self.cx = int(M['m10']/M['m00'])
                 self.cy = int(M['m01']/M['m00'])
 
@@ -307,7 +309,7 @@ class ImageProcessing:
             self.contours_by_area_flip = sorted(contours, key=cv2.contourArea, reverse=True)
             self.hulls_by_area_flip = sorted(hull_list, key=cv2.contourArea, reverse=True)
 
-            M = cv2.moments(self.hulls_by_area_flip[1])
+            M = cv2.moments(self.hulls_by_area_flip[0])
             self.cx = int(M['m10']/M['m00'])
             self.cy = int(M['m01']/M['m00'])
 
